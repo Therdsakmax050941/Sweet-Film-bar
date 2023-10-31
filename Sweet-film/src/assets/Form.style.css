@@ -1,0 +1,26 @@
+.fade-enter-active,
+.fade-leave-active {
+  transition: opacity 0.5s;
+}
+.fade-enter, .fade-leave-to /* .fade-leave-active in <2.1.8 */ {
+  opacity: 0;
+}
+.move-top {
+  margin-top: 20px;
+}
+@media (min-width: 1024px) {
+  .form {
+    width: 120vh;
+  }
+}
+.content01 {
+    width: 250px;
+    height: 250px;
+}
+.my-card{
+  width: 100%;
+  max-width: 250px;
+}
+h6{
+  margin-top: 20px;
+}
