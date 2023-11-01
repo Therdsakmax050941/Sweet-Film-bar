@@ -75,7 +75,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET') {
     echo json_encode($response);
 } elseif($_SERVER['REQUEST_METHOD'] === 'PUT'){
     // ดึงข้อมูล JSON จากฐานข้อมูล
-    $data_id = isset($_GET['id']) ? $_GET['id'] : null; // แทน 'id' ด้วยชื่อพารามิเตอร์ที่คุณใช้ใน URL
+    $data_id = isset($_GET['id']) ? $_GET['id'] : null; // แทน 'id' ด้วยชื่อพารามิเตอร์ URL
 
     if ($data_id) {
         // อ่านข้อมูล JSON จากฐานข้อมูล
@@ -91,7 +91,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET') {
             // แปลง JSON เป็น array
             $data_array = json_decode($json_data, true);
 
-            // ตรวจสอบว่ามีข้อมูลที่คุณต้องการอัปเดต (ยกเลิกหรือเปลี่ยนค่า)
+            // ตรวจสอบว่ามีข้อมูลที่ต้องการอัปเดต (ยกเลิกหรือเปลี่ยนค่า)
             if (isset($_REQUEST['customerStatus'])) {
                 $data_array['key1'] = $_REQUEST['customerStatus'];
             }
