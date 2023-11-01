@@ -524,4 +524,5 @@ fetch("http://localhost:8000/api/", requestOptions)
 };
 </script>
 
-<style scoped></style>
+<style scoped>
+</style>

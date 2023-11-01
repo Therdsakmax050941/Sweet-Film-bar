@@ -26,7 +26,7 @@
               </div>
             </div>
           </q-toolbar-title>
-          <q-tab to="/" label="HOME" />
+          <q-tab to="/form" label="HOME" />
           <q-tab to="/" label="SHOP" />
           <q-tab to="/"  label="FILM LAB" />
           <q-tab to="/" label="WORKSHOP" />

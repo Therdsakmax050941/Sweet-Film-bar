@@ -80,7 +80,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET') {
     if ($data_id) {
         // อ่านข้อมูล JSON จากฐานข้อมูล
         $sql = "SELECT data FROM sweetfilmbar WHERE id = ?";
-        $stmt = $db->connection->prepare($sql);
+        $stmt = $db->$pdo->prepare($sql);
         $stmt->bind_param("i", $data_id); // ต้องใช้ i เนื่องจากเป็น integer
         $stmt->execute();
         $stmt->bind_result($json_data);
@@ -91,20 +91,17 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET') {
             // แปลง JSON เป็น array
             $data_array = json_decode($json_data, true);
 
-            // ตรวจสอบว่ามีข้อมูลที่คุณต้องการอัปเดต (ยกเลิกหรือเปลี่ยนค่าเพื่อให้ตรงกับความต้องการของคุณ)
-            if (isset($_REQUEST['key1'])) {
-                $data_array['key1'] = $_REQUEST['key1'];
-            }
-            if (isset($_REQUEST['key2'])) {
-                $data_array['key2'] = $_REQUEST['key2'];
+            // ตรวจสอบว่ามีข้อมูลที่คุณต้องการอัปเดต (ยกเลิกหรือเปลี่ยนค่า)
+            if (isset($_REQUEST['customerStatus'])) {
+                $data_array['key1'] = $_REQUEST['customerStatus'];
             }
 
             // แปลง array กลับเป็น JSON
             $new_json_data = json_encode($data_array);
 
-            // อัปเดตข้อมูล JSON ในฐานข้อมูลด้วยข้อมูล JSON ใหม่ที่คุณได้แก้ไข
+            // อัปเดตข้อมูล JSON ในฐานข้อมูลด้วยข้อมูล JSON 
             $update_sql = "UPDATE sweetfilmbar SET data = ? WHERE id = ?";
-            $stmt = $db->db->prepare($update_sql);
+            $stmt = $db->$pdo->prepare($update_sql);
             $stmt->bind_param("si", $new_json_data, $data_id);
             
             if ($stmt->execute()) {
