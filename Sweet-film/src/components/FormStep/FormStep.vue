@@ -43,7 +43,7 @@
               <h6>Your selection is: {{ formData.customerStatus }}</h6>
             </div>
           </div>
-          <q-input outlined type="text" v-model="formData.name" label="Name" />
+          <q-input outlined type="text" v-model="formData.FullName" label="Name" />
           <q-input
             outlined
             type="email"
@@ -316,8 +316,8 @@
                 <q-card-section>
                   <q-radio
                   v-model="formData.PackageFilmDelivery"
-                  val="Use non-PVC film archival sleeves"
-                  label="Use non-PVC film archival sleeves (+30 Baht/roll)"
+                  val="Use general sleeves"
+                  label="Use general sleeves / ใช้ซองทั่วไป"
                 />
                 </q-card-section>
               </q-card> 
@@ -427,7 +427,7 @@
 
 <script>
 import { ref } from "vue";
-
+import axios from "axios";
 export default {
   data() {
     return {
@@ -480,23 +480,13 @@ export default {
     previousStep() {
       this.step--;
     },
-    submitForm() {
-      var myHeaders = new Headers();
-myHeaders.append("Content-Type", "application/json");
-
-var raw = JSON.stringify(this.formData);
-
-var requestOptions = {
-  method: 'POST',
-  headers: myHeaders,
-  body: raw,
-  redirect: 'follow'
-};
-
-fetch("http://localhost:8000/api/", requestOptions)
-  .then(response => response.text())
-  .then(result => console.log(result))
-  .catch(error => console.log('error', error));
+    async submitForm() {
+      try {
+        const response = await axios.post("https://max.idea-initiation.com/api/", this.formData);
+        console.log(response.data);
+      } catch (error) {
+        console.error("Error:", error);
+      }
     },
     inputChange(event, i) {
       this.formData.data.AboutFilm.push(event);
